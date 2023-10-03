@@ -14,10 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="./public/icon.png" />
-      </head>
-      <body className="w-full h-full">
+      <body className="bg-slate-300">
         <ContextProvider>{children}</ContextProvider>
       </body>
     </html>
