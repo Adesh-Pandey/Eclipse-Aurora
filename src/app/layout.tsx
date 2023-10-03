@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+        <link rel="icon" href="./public/icon.png" />
       </head>
       <body className="w-full h-full">
         <ContextProvider>{children}</ContextProvider>
