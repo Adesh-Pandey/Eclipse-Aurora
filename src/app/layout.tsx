@@ -14,9 +14,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-      <ContextProvider>
-        {children}</ContextProvider></body>
+      <body className='w-full h-full'>
+      <ContextProvider>{children}</ContextProvider></body>
     </html>
   )
 }
