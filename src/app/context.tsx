@@ -1,37 +1,41 @@
 "use client";
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState } from "react";
 
-export const SimulationContext=createContext<null | {
-    simulationSpec:SimulationSpecificationProps|null,
-    setSimulationSpec:(spec:SimulationSpecificationProps)=>void
+export const SimulationContext = createContext<null | {
+  simulationSpec: SimulationSpecificationProps | null;
+  setSimulationSpec: (spec: SimulationSpecificationProps) => void;
 }>(null);
 
-export type SimulationSpecificationProps={
-    earth:{}
-    moon:{}
-    sun:{}
-}
+export type SimulationSpecificationProps = {
+  earth: {};
+  moon: {};
+  sun: {};
+};
 
-export function ContextProvider({children}:{children:React.ReactNode}){
-
-    const [simulationSpec, setSimulationSpec]= useState<SimulationSpecificationProps|null>({
-        earth:{},
-        moon:{},
-        sun:{}
+export function ContextProvider({ children }: { children: React.ReactNode }) {
+  const [simulationSpec, setSimulationSpec] =
+    useState<SimulationSpecificationProps | null>({
+      earth: {},
+      moon: {},
+      sun: {},
     });
 
-    return <SimulationContext.Provider value={{
+  return (
+    <SimulationContext.Provider
+      value={{
         simulationSpec,
-        setSimulationSpec
-    }}>
-    {children}
+        setSimulationSpec,
+      }}
+    >
+      {children}
     </SimulationContext.Provider>
+  );
 }
 
-export function useSimulationSpecs(){
-    const context=useContext(SimulationContext);
-    if(!context){
-        throw new Error("useSimulationSpecs must be used within a ContextProvider");
-    }
-    return context
+export function useSimulationSpecs() {
+  const context = useContext(SimulationContext);
+  if (!context) {
+    throw new Error("useSimulationSpecs must be used within a ContextProvider");
+  }
+  return context;
 }
