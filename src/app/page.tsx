@@ -1,6 +1,4 @@
-"use client";
-import Chat from "./Chat";
-import Simulation from "./Simuation";
+import {Chat, Simulation} from '@/components'
 
 export default function Home() {
   return (
