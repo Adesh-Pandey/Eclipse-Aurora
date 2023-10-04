@@ -26,7 +26,7 @@ const Earth = () => {
   useEffect(() => {
     requestAnimationFrame(() => {
       setRotationCoord((prev) => ({
-        x: prev.x,
+        x: prev.x + 0.001,
         y: prev.y + 0.01,
         z: prev.z,
       }));
@@ -36,7 +36,7 @@ const Earth = () => {
           ...prev,
           earth: {
             x: 900 * Math.sin(theta / 180),
-            y: 0,
+            y: 500 * Math.sin(theta / 180),
             z: 1300 * Math.cos(theta / 180),
           },
         };

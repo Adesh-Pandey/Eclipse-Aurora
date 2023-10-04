@@ -38,7 +38,7 @@ const Moon = () => {
     requestAnimationFrame(() => {
       setPositionCoordinates((prev) => [
         200 * Math.sin(theta / 180) + simulationSpec.earth.x,
-        prev[1],
+        200 * Math.sin(theta / 180) + simulationSpec.earth.y,
         300 * Math.cos(theta / 180) + simulationSpec.earth.z,
       ]);
 
