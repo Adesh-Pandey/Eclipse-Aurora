@@ -1,18 +1,39 @@
 "use client";
 // import {useGLTF} from "@react-three/drei"
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Mesh } from "three";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 
 const Earth = () => {
-  const mesh = useRef<Mesh>(null!);
+  const mesh = useRef<Mesh>(null);
+
+  const [coord, setCoord] = useState({
+    x: 0,
+    y: 0,
+    z: 0,
+  });
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      setCoord((prev) => ({
+        x: prev.x + 0.01,
+        y: prev.y + 0.01,
+        z: prev.z + 0.01,
+      }));
+    });
+  });
 
   const sun = useLoader(GLTFLoader, "Earth.glb");
   try {
     return (
-      <mesh ref={mesh} position={[0, 0, 1000]} scale={[0.3, 0.3, 0.3]}>
+      <mesh
+        ref={mesh}
+        position={[0, 0, 1000]}
+        rotation={[coord.x, coord.y, coord.z]}
+        scale={[0.3, 0.3, 0.3]}
+      >
         <primitive
           object={sun.scene}
           // test value
