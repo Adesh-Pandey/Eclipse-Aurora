@@ -1,8 +1,14 @@
-import {SimulationContext,SimulationSpecificationProps,ContextProvider} from "./SimulationContext";
+import {
+    SimulationContext,
+    SimulationSpecificationProps,
+    useSimulationSpecs,
+    ContextProvider
+} from "./SimulationContext";
 
 export
 {
+    ContextProvider,
     SimulationContext,
     SimulationSpecificationProps,
-    ContextProvider
+    useSimulationSpecs
 }
