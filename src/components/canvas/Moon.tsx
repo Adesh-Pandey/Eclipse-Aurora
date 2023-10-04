@@ -5,6 +5,7 @@ import { Mesh } from "three";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
+import { useSimulationSpecs } from "@/contexts";
 
 const Moon = () => {
   const mesh = useRef<Mesh>(null!);
@@ -25,13 +26,33 @@ const Moon = () => {
     });
   });
 
+  const [theta, setTheta] = useState(0);
+
+  const [positionCoordinates, setPositionCoordinates] = useState<
+    [number, number, number]
+  >([0, 0, 700]);
+
+  const { simulationSpec, setSimulationSpec } = useSimulationSpecs();
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      setPositionCoordinates((prev) => [
+        200 * Math.sin(theta / 180) + simulationSpec.earth.x,
+        prev[1],
+        300 * Math.cos(theta / 180) + simulationSpec.earth.z,
+      ]);
+
+      setTheta((prev) => prev + 1);
+    });
+  });
+
   const moon = useLoader(GLTFLoader, "Moon.glb");
   try {
     return (
       <mesh
         rotation={[rotationCoord.x, rotationCoord.y, rotationCoord.z]}
         ref={mesh}
-        position={[0, 0, 700]}
+        position={positionCoordinates}
         scale={[0.1, 0.1, 0.1]}
       >
         <primitive object={moon.scene} rotation={[30, 30, 30]} />
