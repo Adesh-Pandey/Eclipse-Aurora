@@ -12,7 +12,7 @@ const Sun = () => {
   const sun = useLoader(GLTFLoader, "Sun.glb");
   try {
     return (
-      <mesh ref={mesh} position={[0, 0, -300]} scale={[0.3, 0.3, 0.3]}>
+      <mesh ref={mesh} position={[0, 0, -300]} scale={[0.5, 0.5, 0.5]}>
         <primitive
           object={sun.scene}
           // test value
