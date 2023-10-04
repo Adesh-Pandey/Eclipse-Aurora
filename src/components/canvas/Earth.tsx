@@ -26,7 +26,7 @@ const Earth = () => {
   useEffect(() => {
     requestAnimationFrame(() => {
       setRotationCoord((prev) => ({
-        x: prev.x + 0.002,
+        x: prev.x + 0.01,
         y: prev.y,
         z: prev.z,
       }));
@@ -37,7 +37,7 @@ const Earth = () => {
         1300 * Math.cos(theta / 180),
       ]);
 
-      setTheta((prev) => prev + 1);
+      setTheta((prev) => prev + 0.1);
     });
   });
 
