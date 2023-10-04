@@ -15,7 +15,6 @@ const Sun = () => {
       <mesh ref={mesh} position={[0, 0, -300]} scale={[0.5, 0.5, 0.5]}>
         <primitive
           object={sun.scene}
-          // test value
           position={[0, 0, -10]}
           rotation={[0, -5, 0]}
         />
