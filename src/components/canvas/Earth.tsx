@@ -9,7 +9,7 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 const Earth = () => {
   const mesh = useRef<Mesh>(null);
 
-  const [coord, setCoord] = useState({
+  const [rotationCoord, setRotationCoord] = useState({
     x: 0,
     y: 0,
     z: 0,
@@ -17,10 +17,10 @@ const Earth = () => {
 
   useEffect(() => {
     requestAnimationFrame(() => {
-      setCoord((prev) => ({
-        x: prev.x + 0.01,
-        y: prev.y + 0.01,
-        z: prev.z + 0.01,
+      setRotationCoord((prev) => ({
+        x: prev.x + 0.002,
+        y: prev.y,
+        z: prev.z,
       }));
     });
   });
@@ -31,7 +31,7 @@ const Earth = () => {
       <mesh
         ref={mesh}
         position={[0, 0, 1000]}
-        rotation={[coord.x, coord.y, coord.z]}
+        rotation={[rotationCoord.x, rotationCoord.y, rotationCoord.z]}
         scale={[0.3, 0.3, 0.3]}
       >
         <primitive
