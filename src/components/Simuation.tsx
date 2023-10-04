@@ -1,4 +1,3 @@
-"use client";
 import CanvasPage from "@/components/canvas";
 
 export default function Simulation() {
