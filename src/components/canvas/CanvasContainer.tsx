@@ -16,7 +16,7 @@ const CanvasContainer = () => {
       <spotLight intensity={1} color={0x61dbfb} position={[-20, 50, 10]} />
       <ambientLight intensity={0.1} />
       <OrbitControls />
-      <Stars count={2500} factor={4} radius={100} depth={50} fade />
+      <Stars count={2500} factor={10} radius={10000} depth={50} fade />
       <Sun />
       <Moon />
       <Earth />

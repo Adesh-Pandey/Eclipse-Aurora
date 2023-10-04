@@ -12,7 +12,7 @@ const Moon = () => {
   const moon = useLoader(GLTFLoader, "Moon.glb");
   try {
     return (
-      <mesh ref={mesh} position={[0, 0, 100]} scale={[0.1, 0.1, 0.1]}>
+      <mesh ref={mesh} position={[0, 0, 700]} scale={[0.1, 0.1, 0.1]}>
         <primitive
           object={moon.scene}
           // test value
