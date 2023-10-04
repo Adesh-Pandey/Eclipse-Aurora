@@ -1,21 +1,35 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 
 export const SimulationContext = createContext<null | {
-  simulationSpec: SimulationSpecificationProps | null;
-  setSimulationSpec: (spec: SimulationSpecificationProps) => void;
+  simulationSpec: SimulationSpecificationProps;
+  setSimulationSpec: Dispatch<SetStateAction<SimulationSpecificationProps>>;
 }>(null);
 
 export type SimulationSpecificationProps = {
-  earth: {};
+  earth: {
+    x: number;
+    y: number;
+    z: number;
+  };
   moon: {};
   sun: {};
 };
 
 export function ContextProvider({ children }: { children: React.ReactNode }) {
   const [simulationSpec, setSimulationSpec] =
-    useState<SimulationSpecificationProps | null>({
-      earth: {},
+    useState<SimulationSpecificationProps>({
+      earth: {
+        x: 0,
+        y: 0,
+        z: 1000,
+      },
       moon: {},
       sun: {},
     });
