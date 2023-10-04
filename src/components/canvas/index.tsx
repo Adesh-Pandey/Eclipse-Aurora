@@ -3,6 +3,7 @@ import CanvasContainer from "./CanvasContainer";
 const CanvasPage = () => {
     return (
         <CanvasContainer/>
+        
     );
 }
 
