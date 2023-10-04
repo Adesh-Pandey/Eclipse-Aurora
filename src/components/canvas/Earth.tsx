@@ -1,10 +1,15 @@
 "use client";
 // import {useGLTF} from "@react-three/drei"
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Mesh } from "three";
 import { Vector3, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
+import { SimulationContext } from "@/contexts";
+import {
+  SimulationSpecificationProps,
+  useSimulationSpecs,
+} from "@/contexts/SimulationContext";
 
 const Earth = () => {
   const mesh = useRef<Mesh>(null);
@@ -14,12 +19,7 @@ const Earth = () => {
     y: 0,
     z: 0,
   });
-
-  const [positionCoord, setPositionCoord] = useState<[number, number, number]>([
-    0, 0, 1000,
-  ]);
-
-  const center = [0, 0, -300];
+  const { simulationSpec, setSimulationSpec } = useSimulationSpecs();
 
   const [theta, setTheta] = useState(0);
 
@@ -31,28 +31,34 @@ const Earth = () => {
         z: prev.z,
       }));
 
-      setPositionCoord((prev) => [
-        900 * Math.sin(theta / 180),
-        0,
-        1300 * Math.cos(theta / 180),
-      ]);
+      setSimulationSpec((prev) => {
+        return {
+          ...prev,
+          earth: {
+            x: 900 * Math.sin(theta / 180),
+            y: 0,
+            z: 1300 * Math.cos(theta / 180),
+          },
+        };
+      });
 
       setTheta((prev) => prev + 0.1);
     });
   });
 
+  const { earth } = simulationSpec;
+  const { x, y, z } = earth;
   const sun = useLoader(GLTFLoader, "Earth.glb");
   try {
     return (
       <mesh
         ref={mesh}
-        position={positionCoord}
+        position={[x, y, z]}
         rotation={[rotationCoord.x, rotationCoord.y, rotationCoord.z]}
         scale={[0.3, 0.3, 0.3]}
       >
         <primitive
           object={sun.scene}
-          // test value
           position={[0, 0, -10]}
           rotation={[0, -5, 0]}
         />
