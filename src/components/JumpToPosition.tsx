@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const JumpToPosition = () => {
   const [month, setMonth] = useState(0);
@@ -8,7 +8,7 @@ const JumpToPosition = () => {
   const [monthError, setMonthError] = useState('');
   const [dayError, setDayError] = useState('');
 
-  const handleMonthChange = (e: React.ChangeEvent<any>) => {
+  const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newMonth = parseInt(e.target.value, 10);
     if (newMonth >= 1 && newMonth <= 12) {
       setMonth(newMonth);
@@ -18,7 +18,7 @@ const JumpToPosition = () => {
     }
   };
 
-  const handleDayChange = (e: React.ChangeEvent<any>) => {
+  const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newDay = parseInt(e.target.value, 10);
     if (newDay >= 1 && newDay <= 30) {
       setDay(newDay);
