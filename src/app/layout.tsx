@@ -1,11 +1,16 @@
-import { ContextProvider } from "@/contexts";
-import "./globals.css";
-import type { Metadata } from "next";
+import { ContextProvider } from '@/contexts';
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
 export const metadata: Metadata = {
-  title: "Fun with Eclipse",
-  description: "By Eclipse Aurora",
+  title: 'Fun with Eclipse',
+  description: 'By Eclipse Aurora',
 };
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export default function RootLayout({
   children,
@@ -13,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-slate-300">
+    <html lang='en' className={inter.className}>
+      <body className='bg-slate-300'>
         <ContextProvider>{children}</ContextProvider>
       </body>
     </html>
