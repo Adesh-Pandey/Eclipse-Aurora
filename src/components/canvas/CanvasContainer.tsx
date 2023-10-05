@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import { Stars, OrbitControls } from '@react-three/drei';
+import { Stars, OrbitControls, CatmullRomLine } from '@react-three/drei';
 import Sun from './Sun';
 import Moon from './Moon';
 import Earth from './Earth';

@@ -17,7 +17,13 @@ const Earth = () => {
   });
   const { simulationSpec, setSimulationSpec } = useSimulationSpecs();
 
-  const [theta, setTheta] = useState(0);
+  const [theta, setTheta] = useState(simulationSpec.earth.theta);
+
+  const thetaFromSpec = simulationSpec.earth.theta;
+
+  useEffect(() => {
+    setTheta(thetaFromSpec);
+  }, [thetaFromSpec]);
 
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -31,14 +37,13 @@ const Earth = () => {
         return {
           ...prev,
           earth: {
+            theta: theta + 0.1,
             x: 900 * Math.sin(theta / 180),
             y: 500 * Math.sin(theta / 180),
             z: 1300 * Math.cos(theta / 180),
           },
         };
       });
-
-      setTheta((prev) => prev + 0.1);
     });
   });
 
