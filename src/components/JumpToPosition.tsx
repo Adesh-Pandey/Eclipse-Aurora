@@ -8,7 +8,7 @@ const JumpToPosition = () => {
   const [monthError, setMonthError] = useState('');
   const [dayError, setDayError] = useState('');
 
-  const handleMonthChange = (e) => {
+  const handleMonthChange = (e: React.ChangeEvent<any>) => {
     const newMonth = parseInt(e.target.value, 10);
     if (newMonth >= 1 && newMonth <= 12) {
       setMonth(newMonth);
@@ -18,7 +18,7 @@ const JumpToPosition = () => {
     }
   };
 
-  const handleDayChange = (e) => {
+  const handleDayChange = (e: React.ChangeEvent<any>) => {
     const newDay = parseInt(e.target.value, 10);
     if (newDay >= 1 && newDay <= 30) {
       setDay(newDay);
