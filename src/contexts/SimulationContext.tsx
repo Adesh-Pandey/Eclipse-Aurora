@@ -1,11 +1,11 @@
-"use client";
+'use client';
 import {
   Dispatch,
   SetStateAction,
   createContext,
   useContext,
   useState,
-} from "react";
+} from 'react';
 
 export const SimulationContext = createContext<null | {
   simulationSpec: SimulationSpecificationProps;
@@ -14,6 +14,7 @@ export const SimulationContext = createContext<null | {
 
 export type SimulationSpecificationProps = {
   earth: {
+    theta: number;
     x: number;
     y: number;
     z: number;
@@ -26,6 +27,7 @@ export function ContextProvider({ children }: { children: React.ReactNode }) {
   const [simulationSpec, setSimulationSpec] =
     useState<SimulationSpecificationProps>({
       earth: {
+        theta: 0,
         x: 0,
         y: 0,
         z: 1000,
@@ -49,7 +51,7 @@ export function ContextProvider({ children }: { children: React.ReactNode }) {
 export function useSimulationSpecs() {
   const context = useContext(SimulationContext);
   if (!context) {
-    throw new Error("useSimulationSpecs must be used within a ContextProvider");
+    throw new Error('useSimulationSpecs must be used within a ContextProvider');
   }
   return context;
 }
