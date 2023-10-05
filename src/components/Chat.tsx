@@ -1,28 +1,41 @@
 'use client'
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState ,useRef,useEffect} from "react";
 import funfacts from './funfacts';
 
 export default function FunFacts() {
     const [isOpen, setIsOpen] = useState(false);
-    const [randomNum, setRandomNum] = useState(-1); // Initialize randomNum
+    const [randomNum, setRandomNum] = useState(-1);
+    const [indexlist, setIndexlist] = useState<number[]>([]);
+    const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
     const handleOpen = () => {
         setIsOpen(true);
-        generateRandomNum(); // Call this when opening the modal
+        generateRandomNum();
     };
+
 
     const handleClose = () => {
         setIsOpen(false);
     };
 
     const generateRandomNum = () => {
-        const newRandomNum = Math.floor(Math.random() * 100);
-        setRandomNum(newRandomNum); // Update randomNum state
+        const newRandomNum = Math.floor(Math.random() * funfacts[0].funFacts.length);
+        setRandomNum(newRandomNum);
+        if(newRandomNum in indexlist){
+            setIndexlist([...indexlist])
+        }
+        setIndexlist([...indexlist, newRandomNum]);
     };
+    useEffect(() => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+        }
+    }, [indexlist]);
+
 
     return (
-        <div className="absolute bottom-0 text-white z-50 right-0 w-56 h-[75vh] flex-col flex justify-end mb-10 mr-5 items-center gap-1 py-2 rounded-xl">
+        <div className="absolute bottom-0 text-white z-50 right-0 w-56 max-h-[75vh] flex-col flex justify-end mb-10 mr-5 items-center gap-1 py-2 rounded-xl">
             <>
                 {isOpen && (
                     <motion.div
@@ -31,8 +44,20 @@ export default function FunFacts() {
                         exit={{ opacity: 0, transform: "scale(0)" }}
                     >
                         <h1 className={'font-serif py-2'}>{funfacts[0].heading} ?🤔</h1>
-                        <hr/>
-                        <p className={'font-serif text-xl transition ease-in-out delay-1500  '}>{funfacts[0].funFacts[randomNum]}</p>
+                        <hr />
+                        <div   ref={scrollContainerRef} className="fact-list-container max-h-[70vh] p-3 py-5  overflow-hidden"  style={{ overflowY: "scroll" }} >
+
+                            <ul className="fact-list list-none ">
+                                {indexlist.map((list, index) => (
+                                    <>
+                                    <li key={index} className={'font-serif text-md transition ease-in-out delay-1500 py-3  '}>
+                                        {funfacts[0].funFacts[list]}
+                                    </li>
+                                    <hr className={'text-red-500 '} />
+                                    </>
+                                ))}
+                            </ul>
+                        </div>
                         <div className={'flex justify-between'}>
                             <button onClick={handleClose} className={'px-2 rounded-lg text-red-500 text-2xl '}>&times;</button>
                             <button onClick={generateRandomNum} className={'bg-green-500 text-white p-2 rounded-b-lg'}>Next</button>

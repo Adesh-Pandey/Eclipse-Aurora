@@ -30,7 +30,7 @@ const JumpToPosition = () => {
 
 
   return (
-    <div className='absolute bottom-40 flex-col rounded-lg border-2 border-green-500 px-4 py-3 text-green-500'>
+    <div className='absolute top-4 right-4 flex-col rounded-lg border-2 border-green-500 px-4 py-3 text-green-500'>
       <p className='pb-2 text-center text-2xl'>Jump to</p>
       <div className='flex gap-2'>
         <label htmlFor='month'>Month:</label>
