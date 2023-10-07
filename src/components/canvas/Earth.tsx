@@ -36,7 +36,7 @@ const Earth = () => {
               x: 900 * Math.sin(theta / 180),
               y: 500 * Math.sin(theta / 180),
               z: 1300 * Math.cos(theta / 180),
-              stop_rev: false,
+              stop_rev: prev.earth.stop_rev,
               stop_rot: prev.earth.stop_rot,
             },
           };
