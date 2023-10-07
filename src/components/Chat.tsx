@@ -16,8 +16,8 @@ export default function Chat() {
   };
 
   useEffect(() => {
-    if (ChatList[currentMessageIndex].function)
-      setSimulationSpec(ChatList[currentMessageIndex].function!);
+    if (ChatList[currentMessageIndex].updateSimulation)
+      setSimulationSpec(ChatList[currentMessageIndex].updateSimulation!);
   }, [currentMessageIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

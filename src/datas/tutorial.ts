@@ -3,7 +3,7 @@ import { SetStateAction } from 'react';
 
 export type ChatMessage = {
   message: string;
-  function?: SetStateAction<SimulationSpecificationProps>; // mutates the state of the simulation and returns the new state
+  updateSimulation?: SetStateAction<SimulationSpecificationProps>; // mutates the state of the simulation and returns the new state
   explanation?: string;
 };
 
@@ -16,7 +16,7 @@ export const ChatList: ChatMessage[] = [
   },
   {
     message: "I'd like to learn about how the Moon rotates.",
-    function: (oldState) => ({
+    updateSimulation: (oldState) => ({
       ...oldState,
       earth: { ...oldState.earth, stop_rev: true, stop_rot: true },
     }),
@@ -25,7 +25,7 @@ export const ChatList: ChatMessage[] = [
   },
   {
     message: 'Tell me about how the Earth rotates and revolves around the Sun.',
-    function: (oldState) => ({
+    updateSimulation: (oldState) => ({
       ...oldState,
       earth: { ...oldState.earth, stop_rot: false, stop_rev: false },
     }),
