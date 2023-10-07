@@ -30,21 +30,23 @@ const Moon = () => {
     [number, number, number]
   >([0, 0, 700]);
 
-  const { simulationSpec, setSimulationSpec } = useSimulationSpecs();
+  const { simulationSpec } = useSimulationSpecs();
+  const { moon } = simulationSpec;
 
   useEffect(() => {
-    requestAnimationFrame(() => {
-      setPositionCoordinates((prev) => [
-        200 * Math.sin(theta / 180) + simulationSpec.earth.x,
-        200 * Math.sin(theta / 180) + simulationSpec.earth.y,
-        300 * Math.cos(theta / 180) + simulationSpec.earth.z,
-      ]);
+    if (moon.stop_rot === false)
+      requestAnimationFrame(() => {
+        setPositionCoordinates((prev) => [
+          200 * Math.sin(theta / 180) + simulationSpec.earth.x,
+          200 * Math.sin(theta / 180) + simulationSpec.earth.y,
+          300 * Math.cos(theta / 180) + simulationSpec.earth.z,
+        ]);
 
-      setTheta((prev) => prev + 1);
-    });
+        setTheta((prev) => prev + 1);
+      });
   });
 
-  const moon = useLoader(GLTFLoader, 'Moon.glb');
+  const Moon3DModel = useLoader(GLTFLoader, 'Moon.glb');
   return (
     <mesh
       rotation={[rotationCoord.x, rotationCoord.y, rotationCoord.z]}
@@ -52,7 +54,7 @@ const Moon = () => {
       position={positionCoordinates}
       scale={[0.1, 0.1, 0.1]}
     >
-      <primitive object={moon.scene} rotation={[30, 30, 30]} />
+      <primitive object={Moon3DModel.scene} rotation={[30, 30, 30]} />
       <ambientLight intensity={10} />
     </mesh>
   );

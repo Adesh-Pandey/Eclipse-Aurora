@@ -17,24 +17,17 @@ const Earth = () => {
   });
   const { simulationSpec, setSimulationSpec } = useSimulationSpecs();
 
-  const [theta, setTheta] = useState(simulationSpec.earth.theta);
-
-  const thetaFromSpec = simulationSpec.earth.theta;
-
-  useEffect(() => {
-    setTheta(thetaFromSpec);
-  }, [thetaFromSpec]);
-
+  const theta = simulationSpec.earth.theta;
   useEffect(() => {
     requestAnimationFrame(() => {
-      if (simulationSpec.earth.stop_rot == false) {
+      if (simulationSpec.earth.stop_rot === false)
         setRotationCoord((prev) => ({
           x: prev.x + 0.001,
           y: prev.y + 0.01,
           z: prev.z,
         }));
-      }
-      if (simulationSpec.earth.stop_rev == false) {
+
+      if (simulationSpec.earth.stop_rev === false)
         setSimulationSpec((prev) => {
           return {
             ...prev,
@@ -48,11 +41,13 @@ const Earth = () => {
             },
           };
         });
-      } else {
-        return null;
-      }
     });
-  });
+  }, [
+    theta,
+    simulationSpec.earth.stop_rev,
+    simulationSpec.earth.stop_rot,
+    setSimulationSpec,
+  ]);
 
   const { earth } = simulationSpec;
   const { x, y, z } = earth;

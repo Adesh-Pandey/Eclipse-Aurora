@@ -23,7 +23,7 @@ const JumpToPosition = () => {
     }
   };
 
-  const { simulationSpec, setSimulationSpec } = useSimulationSpecs();
+  const { setSimulationSpec } = useSimulationSpecs();
 
   const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newDay = parseInt(e.target.value, 10);

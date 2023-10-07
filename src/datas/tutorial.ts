@@ -1,14 +1,13 @@
 import { SimulationSpecificationProps } from '@/contexts/SimulationContext';
-import { type } from 'os';
 import { SetStateAction } from 'react';
 
 export type ChatMessage = {
   message: string;
-  function?: SimulationSpecificationProps;
+  function?: SetStateAction<SimulationSpecificationProps>; // mutates the state of the simulation and returns the new state
   explanation?: string;
 };
 
-export const Chatlist: ChatMessage[] = [
+export const ChatList: ChatMessage[] = [
   {
     message:
       "Welcome! Let's start with the basics of celestial motion. Would you like to learn about how the Moon rotates or how the Earth rotates and revolves around the Sun?",
@@ -17,31 +16,19 @@ export const Chatlist: ChatMessage[] = [
   },
   {
     message: "I'd like to learn about how the Moon rotates.",
-    function: {
-      earth: {
-        theta: 0,
-        x: 0,
-        y: 0,
-        z: 1000,
-        stop_rot: true,
-        stop_rev: true,
-      },
-      moon: {
-        theta: 0,
-        x: 0,
-        y: 0,
-        z: 2000,
-        stop_rot: true,
-
-        stop_rev: false,
-      },
-      sun: {},
-    },
+    function: (oldState) => ({
+      ...oldState,
+      earth: { ...oldState.earth, stop_rev: true, stop_rot: true },
+    }),
     explanation:
       "Great choice! We'll begin by understanding how the Moon rotates on its axis.",
   },
   {
     message: 'Tell me about how the Earth rotates and revolves around the Sun.',
+    function: (oldState) => ({
+      ...oldState,
+      earth: { ...oldState.earth, stop_rot: false, stop_rev: false },
+    }),
     explanation:
       "Sure! Let's delve into how the Earth rotates on its axis and orbits the Sun.",
   },
