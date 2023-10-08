@@ -34,16 +34,16 @@ const Moon = () => {
   const { moon } = simulationSpec;
 
   useEffect(() => {
-    if (moon.stop_rot === false)
-      requestAnimationFrame(() => {
-        setPositionCoordinates((prev) => [
-          200 * Math.sin(theta / 180) + simulationSpec.earth.x,
-          200 * Math.sin(theta / 180) + simulationSpec.earth.y,
-          300 * Math.cos(theta / 180) + simulationSpec.earth.z,
-        ]);
-
+    requestAnimationFrame(() => {
+      if (moon.stop_rot === false) {
         setTheta((prev) => prev + 1);
-      });
+      }
+      setPositionCoordinates((prev) => [
+        200 * Math.sin(theta / 180) + simulationSpec.earth.x,
+        200 * Math.sin(theta / 180) + simulationSpec.earth.y,
+        300 * Math.cos(theta / 180) + simulationSpec.earth.z,
+      ]);
+    });
   });
 
   const Moon3DModel = useLoader(GLTFLoader, 'Moon.glb');
@@ -53,9 +53,11 @@ const Moon = () => {
       ref={mesh}
       position={positionCoordinates}
       scale={[0.1, 0.1, 0.1]}
+      castShadow
+      receiveShadow
     >
       <primitive object={Moon3DModel.scene} rotation={[30, 30, 30]} />
-      <ambientLight intensity={10} />
+      <ambientLight intensity={0.5} />
     </mesh>
   );
 };

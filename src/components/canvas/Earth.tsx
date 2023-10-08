@@ -32,10 +32,10 @@ const Earth = () => {
           return {
             ...prev,
             earth: {
-              theta: theta + 0.1,
-              x: 900 * Math.sin(theta / 180),
-              y: 500 * Math.sin(theta / 180),
-              z: 1300 * Math.cos(theta / 180),
+              theta: theta + 0.5,
+              x: 1800 * Math.sin(theta / 180),
+              y: 1000 * Math.sin(theta / 180),
+              z: 2000 * Math.cos(theta / 180),
               stop_rev: prev.earth.stop_rev,
               stop_rot: prev.earth.stop_rot,
             },
@@ -59,13 +59,15 @@ const Earth = () => {
       position={[x, y, z]}
       rotation={[rotationCoord.x, rotationCoord.y, rotationCoord.z]}
       scale={[0.3, 0.3, 0.3]}
+      castShadow
+      receiveShadow
     >
       <primitive
         object={glb.scene}
         position={[0, 0, -10]}
         rotation={[0, -5, 0]}
       />
-      <ambientLight intensity={10} />
+      <ambientLight intensity={0.5} />
     </mesh>
   );
 };

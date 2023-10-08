@@ -18,9 +18,16 @@ const CanvasContainer = () => {
         far: 10000,
         scale: 100,
       }}
+      shadows
     >
-      <pointLight intensity={2} color={0x61dbfb} position={[0, 5, 5]} />
-      <spotLight intensity={1} color={0x61dbfb} position={[-20, 50, 10]} />
+      <directionalLight
+        visible={true}
+        position={[0, 0, 0]}
+        castShadow={true}
+        color={0x61dbfb}
+        intensity={20} // Adjust the intensity as needed
+      />
+
       <ambientLight intensity={0.1} />
       <OrbitControls maxDistance={30000} />
       <Stars count={2500} factor={10} radius={10000} depth={50} fade />

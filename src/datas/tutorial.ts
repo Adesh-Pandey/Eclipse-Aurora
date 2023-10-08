@@ -28,12 +28,26 @@ export const ChatList: ChatMessage[] = [
     updateSimulation: (oldState) => ({
       ...oldState,
       earth: { ...oldState.earth, stop_rot: false, stop_rev: false },
+      moon: {
+        ...oldState.moon,
+        stop_rev: true,
+        stop_rot: true,
+      },
     }),
     explanation:
       "Sure! Let's delve into how the Earth rotates on its axis and orbits the Sun.",
   },
   {
     message: 'How does the Moon rotate?',
+    updateSimulation: (oldState) => ({
+      ...oldState,
+      earth: { ...oldState.earth, stop_rot: false, stop_rev: false },
+      moon: {
+        ...oldState.moon,
+        stop_rev: false,
+        stop_rot: false,
+      },
+    }),
     explanation:
       "The Moon rotates on its axis, but did you know that it also has a synchronous rotation with Earth? We'll explore this phenomenon.",
   },
