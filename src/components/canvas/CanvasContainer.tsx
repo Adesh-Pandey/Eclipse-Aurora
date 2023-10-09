@@ -29,7 +29,7 @@ const CanvasContainer = () => {
       />
 
       <ambientLight intensity={0.1} />
-      <OrbitControls maxDistance={30000} />
+      <OrbitControls maxDistance={30000} minDistance={1000} />
       <Stars count={2500} factor={10} radius={10000} depth={50} fade />
       <Sun />
       <Moon />
